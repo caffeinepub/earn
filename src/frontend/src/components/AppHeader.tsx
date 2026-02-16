@@ -1,15 +1,17 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
-import { Menu, Wallet, TrendingUp, ArrowDownToLine, ArrowUpFromLine, Users, User, Shield } from 'lucide-react';
+import { Menu, Wallet, TrendingUp, ArrowDownToLine, ArrowUpFromLine, Users, User, Shield, ExternalLink } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import LoginButton from './LoginButton';
 import { useIsAdmin } from '../hooks/useQueries';
 import { useState } from 'react';
+import { getExternalWebsiteConfig } from '../config/externalWebsite';
 
 export default function AppHeader() {
   const navigate = useNavigate();
   const { data: isAdmin } = useIsAdmin();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const externalWebsite = getExternalWebsiteConfig();
 
   const navItems = [
     { label: 'Plans', path: '/plans', icon: TrendingUp },
@@ -53,6 +55,23 @@ export default function AppHeader() {
                 </Button>
               );
             })}
+            {externalWebsite && (
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+              >
+                <a
+                  href={externalWebsite.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gap-2"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  {externalWebsite.label}
+                </a>
+              </Button>
+            )}
           </nav>
         </div>
 
@@ -86,6 +105,23 @@ export default function AppHeader() {
                     </Button>
                   );
                 })}
+                {externalWebsite && (
+                  <Button
+                    variant="ghost"
+                    asChild
+                  >
+                    <a
+                      href={externalWebsite.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="justify-start gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      {externalWebsite.label}
+                    </a>
+                  </Button>
+                )}
                 <div className="pt-4 border-t border-border">
                   <LoginButton />
                 </div>

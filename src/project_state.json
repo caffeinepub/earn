@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
+  "projectStateVersion": 5,
   "summary": "Build an online earning app named \"Earn\" with deposit-based plans, withdrawal via Easypaisa/JazzCash, and referral bonuses.",
   "architectural_notes": [
     "Support payment methods: Easypaisa deposits and Easypaisa/JazzCash withdrawals",
@@ -11,7 +11,6 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- App logo mark with text “Earn”, modern minimal style (earn-logo.dim_512x512.png)\n- Landing illustration showing abstract growth/earnings dashboard elements, warm palette (earn-hero-illustration.dim_1600x900.png)",
   "existing_features": [
     {
       "id": "feature-create-the-core-app-information-architecture-and-navigation-for-an-app-named-earn-including-pages-sections-for-plans-deposit-wallet-balance-withdrawals-referrals-and-account",
@@ -84,6 +83,22 @@
         "REQ-9"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-add-a-configurable-external-website-link-url-label-to-the-earn-app-ui-so-users-can-click-from-the-app-to-the-user-s-website",
+      "title": "Add a configurable external website link (URL + label) to the Earn app UI so users can click from the app to the user’s website.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-same-configurable-external-website-link-to-the-global-footer-alongside-the-existing-attribution-link-s",
+      "title": "Add the same configurable external website link to the global footer alongside the existing attribution link(s).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -108,6 +123,12 @@
     {
       "id": "AR-4",
       "summary": "Referral bonus system with tiered rewards based on number of referrals joining and having an active plan",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Link the Earn app to the user's website (e.g., deploy/connect via a website link or custom domain)",
       "reqIds": [],
       "status": "pending"
     }

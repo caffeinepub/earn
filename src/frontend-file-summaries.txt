@@ -1,7 +1,7 @@
 {
   "frontend/src/App.tsx": "Main application component with TanStack Router setup, routing all pages (Plans, Deposit, Wallet, Withdrawals, Referrals, Account, Admin), wrapped with ThemeProvider and AuthGate.",
-  "frontend/src/components/AppLayout.tsx": "Shared layout wrapper that provides consistent header, main content container, and footer with caffeine.ai attribution across all pages.",
-  "frontend/src/components/AppHeader.tsx": "Sticky header component displaying Earn logo, navigation menu for all pages, responsive mobile menu, and login button with admin link when applicable.",
+  "frontend/src/components/AppLayout.tsx": "Shared layout wrapper that provides consistent header, main content container, and footer with caffeine.ai attribution and optional external website link (when configured) across all pages.",
+  "frontend/src/components/AppHeader.tsx": "Sticky header component displaying Earn logo, navigation menu for all pages, optional external website link (when configured), responsive mobile menu, and login button with admin link when applicable.",
   "frontend/src/components/LoginButton.tsx": "Login/logout button component using Internet Identity hook with proper state management and query cache clearing on logout.",
   "frontend/src/components/AuthGate.tsx": "Authentication gate that shows a branded login screen for unauthenticated users and renders children only when logged in.",
   "frontend/src/components/AdminGate.tsx": "Admin-only access control wrapper that displays an access denied screen for non-admin users.",
@@ -24,5 +24,6 @@
   "frontend/index.css": "Global styles with OKLCH color system featuring a blue/teal primary palette with warm amber accents for light and dark modes.",
   "frontend/tailwind.config.js": "Tailwind configuration with custom color tokens, Inter font family, and extended design system for consistent styling.",
   "frontend/src/main.tsx": "Application entry point that sets up React Query, Internet Identity provider, and renders the App component with correct relative CSS import.",
-  "frontend/src/index.css": "Global styles with OKLCH color system featuring a blue/teal primary palette with warm amber accents for light and dark modes."
+  "frontend/src/index.css": "Global styles with OKLCH color system featuring a blue/teal primary palette with warm amber accents for light and dark modes.",
+  "frontend/src/config/externalWebsite.ts": "Configuration module that reads VITE_WEBSITE_URL and VITE_WEBSITE_LABEL environment variables, validates the URL (http/https only), and returns a config object or null if no valid URL is configured."
 }

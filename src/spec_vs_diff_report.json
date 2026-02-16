@@ -1,78 +1,33 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-16T00:39:08.339Z",
-  "summary": "The diff adds a full frontend navigation shell for “Earn”, core pages/routes, plan querying, deposit account details querying, screenshot upload UI, request status tables, and admin pending request tables. Several key business rules (withdrawal method selection/min-max validation, earnings accrual display/logic, and referral signup/tier bonus logic) are not clearly evidenced in the provided diff summary due to truncation/omitted files, and one clear mismatch is that withdrawal submission currently lacks payout method input/parameter.",
+  "generatedAt": "2026-02-16T01:16:44.951Z",
+  "summary": "Implemented a frontend-configurable external website link via a new config module and added rendering in the desktop primary navigation and in the global footer with target=_blank and rel=\"noopener noreferrer\". The diff is truncated for the mobile menu portion of AppHeader, so it cannot be confirmed whether the link is also present in the mobile menu as required.",
   "missing_requirements": [
     {
-      "id": "REQ-5",
-      "requirement": "Withdrawal request form must include payout method selection with exactly “Easypaisa” and “JazzCash”, and backend/API must accept and validate it along with amount/account number.",
-      "reason": "The frontend mutation used to submit a withdrawal only passes { account, amount } and does not include any payout method, so the required method dropdown/selection cannot be sent to the backend from this path.",
+      "id": "REQ-10",
+      "requirement": "A new external link is available in the mobile menu (in addition to primary navigation/desktop).",
+      "reason": "AppHeader.tsx is truncated in the mobile menu section; the diff summary does not show the external website link being rendered inside the SheetContent/mobile menu list.",
       "evidence": [
-        "frontend/src/hooks/useQueries.ts"
-      ]
-    },
-    {
-      "id": "REQ-9",
-      "requirement": "Use both generated static branding images (logo and landing illustration) in the UI; illustration should appear on landing or Plans page.",
-      "reason": "The logo is referenced in the header and auth gate, but no reference to the required hero/illustration asset is shown in the provided diff summary.",
-      "evidence": [
-        "frontend/src/components/AppHeader.tsx",
-        "frontend/src/components/AuthGate.tsx"
+        "frontend/src/components/AppHeader.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Admin access initialized via a secret URL parameter token (caffeineAdminToken) rather than only an in-code admin principal list.",
-      "reason": "The BuildRequest specifies an admin principal list configurable in code; the diff shows an additional secret-token initialization mechanism not requested.",
+      "description": "Validation that the configured website URL must start with http:// or https://, otherwise returns null and logs a console warning.",
+      "reason": "The BuildRequest only requires configurability and conditional rendering when no URL is configured; it does not request protocol validation or console warnings.",
       "evidence": [
-        "frontend/src/hooks/useActor.ts"
-      ]
-    },
-    {
-      "description": "Footer includes an external marketing/referral link to caffeine.ai with UTM parameters.",
-      "reason": "Not requested by the BuildRequest; adds external link/branding beyond the specified app branding assets.",
-      "evidence": [
-        "frontend/src/components/AppLayout.tsx"
+        "frontend/src/config/externalWebsite.ts"
       ]
     }
   ],
-  "confidence": 0.62,
+  "confidence": 0.68,
   "changed_files": [
-    "all_files_summary.json",
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/index.css",
-    "frontend/index.html",
-    "frontend/src/App.tsx",
-    "frontend/src/components/AdminGate.tsx",
     "frontend/src/components/AppHeader.tsx",
     "frontend/src/components/AppLayout.tsx",
-    "frontend/src/components/AuthGate.tsx",
-    "frontend/src/components/CopyToClipboardButton.tsx",
-    "frontend/src/components/DepositRequestList.tsx",
-    "frontend/src/components/FileUploadField.tsx",
-    "frontend/src/components/LoginButton.tsx",
-    "frontend/src/components/PlanCard.tsx",
-    "frontend/src/components/WithdrawalRequestList.tsx",
-    "frontend/src/components/admin/PendingDepositsTable.tsx",
-    "frontend/src/components/admin/PendingWithdrawalsTable.tsx",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useInternetIdentity.ts",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/index.css",
-    "frontend/src/main.tsx",
-    "frontend/src/pages/AccountPage.tsx",
-    "frontend/src/pages/DepositPage.tsx",
-    "frontend/src/pages/PlansPage.tsx",
-    "frontend/src/pages/ReferralsPage.tsx",
-    "frontend/src/pages/WalletPage.tsx",
-    "frontend/src/pages/WithdrawalsPage.tsx",
-    "frontend/src/pages/admin/AdminDashboardPage.tsx",
-    "frontend/src/utils/earnings.ts",
-    "frontend/src/utils/urlParams.ts",
-    "frontend/tailwind.config.js",
+    "frontend/src/config/externalWebsite.ts",
     "project_state.json"
   ]
 }
