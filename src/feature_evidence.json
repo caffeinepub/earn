@@ -1,0 +1,209 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-the-core-app-information-architecture-and-navigation-for-an-app-named-earn-including-pages-sections-for-plans-deposit-wallet-balance-withdrawals-referrals-and-account",
+      "featureTitle": "Create the core app information architecture and navigation for an app named “Earn”, including pages/sections for: Plans, Deposit, Wallet/Balance, Withdrawals, Referrals, and Account.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AuthGate.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/AccountPage.tsx",
+        "frontend/src/pages/DepositPage.tsx",
+        "frontend/src/pages/PlansPage.tsx",
+        "frontend/src/pages/ReferralsPage.tsx",
+        "frontend/src/pages/WalletPage.tsx",
+        "frontend/src/pages/WithdrawalsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-earning-plans-exactly-as-provided-and-display-them-consistently-across-the-app-plan-1-deposit-300-daily-profit-50-duration-7-days-plan-2-deposit-700-daily-profit-110-duration-7-days-plan-3-deposit-2000-daily-profit-200-duration-12-days-plan-4-deposit-5000-daily-profit-250-duration-30-days",
+      "featureTitle": "Implement earning plans exactly as provided and display them consistently across the app: Plan 1 (Deposit 300, Daily profit 50, Duration 7 days), Plan 2 (Deposit 700, Daily profit 110, Duration 7 days), Plan 3 (Deposit 2000, Daily profit 200, Duration 12 days), Plan 4 (Deposit 5000, Daily profit 250, Duration 30 days).",
+      "files": [
+        "frontend/src/components/PlanCard.tsx",
+        "frontend/src/pages/PlansPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-deposit-flow-that-shows-the-deposit-account-details-and-allows-the-user-to-submit-a-deposit-request-with-an-uploaded-payment-screenshot-for-verification-deposit-details-must-include-account-holder-name-tayyab-raza-number-03710416136-channel-easypaisa",
+      "featureTitle": "Implement a deposit flow that shows the deposit account details and allows the user to submit a deposit request with an uploaded payment screenshot for verification. Deposit details must include: Account holder name “Tayyab Raza”, number “03710416136”, channel “Easypaisa”.",
+      "files": [
+        "frontend/src/components/DepositRequestList.tsx",
+        "frontend/src/components/FileUploadField.tsx",
+        "frontend/src/pages/DepositPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-plan-activation-and-earnings-accrual-tied-to-approved-deposits-when-a-deposit-request-for-a-plan-is-approved-that-plan-becomes-active-for-the-user-for-its-configured-duration-and-the-user-accrues-daily-profit-for-that-duration",
+      "featureTitle": "Implement plan activation and earnings accrual tied to approved deposits: when a deposit request for a plan is approved, that plan becomes active for the user for its configured duration and the user accrues daily profit for that duration.",
+      "files": [
+        "frontend/src/pages/WalletPage.tsx",
+        "frontend/src/utils/earnings.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-withdrawal-request-form-where-the-user-enters-an-account-number-and-selects-a-payout-method-easypaisa-or-jazzcash-and-enters-an-amount-enforce-minimum-withdrawal-of-100-and-maximum-withdrawal-of-5000",
+      "featureTitle": "Implement a withdrawal request form where the user enters an account number and selects a payout method (“Easypaisa” or “JazzCash”), and enters an amount. Enforce minimum withdrawal of 100 and maximum withdrawal of 5000.",
+      "files": [
+        "frontend/src/components/WithdrawalRequestList.tsx",
+        "frontend/src/pages/WithdrawalsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-referral-system-that-assigns-each-user-a-referral-code-link-and-tracks-referred-signups-award-one-time-referral-bonuses-when-the-number-of-referrals-who-have-joined-and-have-an-active-plan-reaches-these-tiers-3-referrals-150-bonus-5-300-10-800-50-4000",
+      "featureTitle": "Implement a referral system that assigns each user a referral code/link and tracks referred signups. Award one-time referral bonuses when the number of referrals who have joined AND have an active plan reaches these tiers: 3 referrals => 150 bonus, 5 => 300, 10 => 800, 50 => 4000.",
+      "files": [
+        "frontend/src/components/CopyToClipboardButton.tsx",
+        "frontend/src/pages/ReferralsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-admin-only-workflow-to-review-and-process-deposit-and-withdrawal-requests-approve-reject-so-that-send-screenshot-verification-and-withdrawals-can-be-managed-inside-the-app",
+      "featureTitle": "Add an admin-only workflow to review and process deposit and withdrawal requests (approve/reject) so that “send screenshot” verification and withdrawals can be managed inside the app.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AdminGate.tsx",
+        "frontend/src/components/admin/PendingDepositsTable.tsx",
+        "frontend/src/components/admin/PendingWithdrawalsTable.tsx",
+        "frontend/src/pages/admin/AdminDashboardPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-establish-a-coherent-visual-theme-for-the-earn-app-and-apply-it-consistently-across-all-pages-typography-spacing-component-styling-and-layout-choose-a-distinct-style-appropriate-for-a-finance-earning-dashboard-avoid-blue-purple-by-default",
+      "featureTitle": "Establish a coherent visual theme for the “Earn” app and apply it consistently across all pages (typography, spacing, component styling, and layout). Choose a distinct style appropriate for a finance/earning dashboard (avoid blue/purple by default).",
+      "files": [
+        "frontend/index.css",
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-image-assets-for-branding-and-basic-ui-polish-and-render-them-in-the-ui-stored-under-frontend-public-assets-generated",
+      "featureTitle": "Add generated static image assets for branding and basic UI polish, and render them in the UI (stored under frontend/public/assets/generated).",
+      "files": [
+        "frontend/src/components/AppHeader.tsx",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/pages/PlansPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

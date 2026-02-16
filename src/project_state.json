@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build an online earning app named \"Earn\" with deposit-based plans, withdrawal via Easypaisa/JazzCash, and referral bonuses.",
+  "architectural_notes": [
+    "Support payment methods: Easypaisa deposits and Easypaisa/JazzCash withdrawals",
+    "Deposits require screenshot submission for manual/admin verification",
+    "Plans include: (300 deposit, 50/day, 7 days), (700 deposit, 110/day, 7 days), (2000 deposit, 200/day, 12 days), (5000 deposit, 250/day, 30 days)",
+    "Withdrawal constraints: minimum 100, maximum 5000",
+    "Referral bonus tiers: 3 referrals=150, 5=300, 10=800, 50=4000 (requires referrals join + active plan)"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- App logo mark with text “Earn”, modern minimal style (earn-logo.dim_512x512.png)\n- Landing illustration showing abstract growth/earnings dashboard elements, warm palette (earn-hero-illustration.dim_1600x900.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-the-core-app-information-architecture-and-navigation-for-an-app-named-earn-including-pages-sections-for-plans-deposit-wallet-balance-withdrawals-referrals-and-account",
+      "title": "Create the core app information architecture and navigation for an app named “Earn”, including pages/sections for: Plans, Deposit, Wallet/Balance, Withdrawals, Referrals, and Account.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-earning-plans-exactly-as-provided-and-display-them-consistently-across-the-app-plan-1-deposit-300-daily-profit-50-duration-7-days-plan-2-deposit-700-daily-profit-110-duration-7-days-plan-3-deposit-2000-daily-profit-200-duration-12-days-plan-4-deposit-5000-daily-profit-250-duration-30-days",
+      "title": "Implement earning plans exactly as provided and display them consistently across the app: Plan 1 (Deposit 300, Daily profit 50, Duration 7 days), Plan 2 (Deposit 700, Daily profit 110, Duration 7 days), Plan 3 (Deposit 2000, Daily profit 200, Duration 12 days), Plan 4 (Deposit 5000, Daily profit 250, Duration 30 days).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-deposit-flow-that-shows-the-deposit-account-details-and-allows-the-user-to-submit-a-deposit-request-with-an-uploaded-payment-screenshot-for-verification-deposit-details-must-include-account-holder-name-tayyab-raza-number-03710416136-channel-easypaisa",
+      "title": "Implement a deposit flow that shows the deposit account details and allows the user to submit a deposit request with an uploaded payment screenshot for verification. Deposit details must include: Account holder name “Tayyab Raza”, number “03710416136”, channel “Easypaisa”.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-plan-activation-and-earnings-accrual-tied-to-approved-deposits-when-a-deposit-request-for-a-plan-is-approved-that-plan-becomes-active-for-the-user-for-its-configured-duration-and-the-user-accrues-daily-profit-for-that-duration",
+      "title": "Implement plan activation and earnings accrual tied to approved deposits: when a deposit request for a plan is approved, that plan becomes active for the user for its configured duration and the user accrues daily profit for that duration.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-withdrawal-request-form-where-the-user-enters-an-account-number-and-selects-a-payout-method-easypaisa-or-jazzcash-and-enters-an-amount-enforce-minimum-withdrawal-of-100-and-maximum-withdrawal-of-5000",
+      "title": "Implement a withdrawal request form where the user enters an account number and selects a payout method (“Easypaisa” or “JazzCash”), and enters an amount. Enforce minimum withdrawal of 100 and maximum withdrawal of 5000.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-referral-system-that-assigns-each-user-a-referral-code-link-and-tracks-referred-signups-award-one-time-referral-bonuses-when-the-number-of-referrals-who-have-joined-and-have-an-active-plan-reaches-these-tiers-3-referrals-150-bonus-5-300-10-800-50-4000",
+      "title": "Implement a referral system that assigns each user a referral code/link and tracks referred signups. Award one-time referral bonuses when the number of referrals who have joined AND have an active plan reaches these tiers: 3 referrals => 150 bonus, 5 => 300, 10 => 800, 50 => 4000.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-only-workflow-to-review-and-process-deposit-and-withdrawal-requests-approve-reject-so-that-send-screenshot-verification-and-withdrawals-can-be-managed-inside-the-app",
+      "title": "Add an admin-only workflow to review and process deposit and withdrawal requests (approve/reject) so that “send screenshot” verification and withdrawals can be managed inside the app.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-visual-theme-for-the-earn-app-and-apply-it-consistently-across-all-pages-typography-spacing-component-styling-and-layout-choose-a-distinct-style-appropriate-for-a-finance-earning-dashboard-avoid-blue-purple-by-default",
+      "title": "Establish a coherent visual theme for the “Earn” app and apply it consistently across all pages (typography, spacing, component styling, and layout). Choose a distinct style appropriate for a finance/earning dashboard (avoid blue/purple by default).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-for-branding-and-basic-ui-polish-and-render-them-in-the-ui-stored-under-frontend-public-assets-generated",
+      "title": "Add generated static image assets for branding and basic UI polish, and render them in the UI (stored under frontend/public/assets/generated).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create \"Earn\" app with multiple earning plans (deposit amount, daily profit, duration) and plan activation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Deposit flow: show deposit account details (Easypaisa) and allow user to upload/send payment screenshot for verification",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Withdrawal flow: user enters account number, selects Easypaisa or JazzCash, enforces minimum/maximum withdrawal limits",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Referral bonus system with tiered rewards based on number of referrals joining and having an active plan",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Earn",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

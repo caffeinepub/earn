@@ -1,0 +1,360 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Earn — frontend UI for plans, deposits (screenshot), wallet, withdrawals, referrals, and admin review",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create the core information architecture and navigation for “Earn” with Plans, Deposit, Wallet/Balance, Withdrawals, Referrals, and Account sections.",
+      "acceptanceCriteria": [
+        "App header/landing clearly shows the product name “Earn”.",
+        "User can navigate to Plans, Deposit, Withdrawals, Referrals, and Wallet/Balance from the UI.",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the root app shell with routing/navigation to Plans, Deposit, Wallet/Balance, Withdrawals, Referrals, and Account. Include a consistent header that displays “Earn”. Use shadcn-ui layout primitives (e.g., navigation, buttons) to keep styling consistent. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Wire the new App shell into the React entrypoint and ensure global styles load correctly (keep all user-facing text in English)."
+        },
+        {
+          "path": "frontend/src/pages/PlansPage.tsx",
+          "operation": "create",
+          "description": "Add the Plans page view and ensure it is reachable via the main navigation. Use shadcn-ui Card/Button components for plan presentation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DepositPage.tsx",
+          "operation": "create",
+          "description": "Add the Deposit page view and ensure it is reachable via the main navigation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/WalletPage.tsx",
+          "operation": "create",
+          "description": "Add the Wallet/Balance page view and ensure it is reachable via the main navigation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/WithdrawalsPage.tsx",
+          "operation": "create",
+          "description": "Add the Withdrawals page view and ensure it is reachable via the main navigation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ReferralsPage.tsx",
+          "operation": "create",
+          "description": "Add the Referrals page view and ensure it is reachable via the main navigation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/AccountPage.tsx",
+          "operation": "create",
+          "description": "Add the Account page view for user profile setup/display, and ensure it is reachable via the main navigation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AuthGate.tsx",
+          "operation": "create",
+          "description": "Implement an authentication gate that requires Internet Identity login before showing application data, per the authorization component guidance. Render a friendly access/login screen for guests. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add a Login/Logout button using the existing Internet Identity hook patterns described by the authorization component. Ensure logout clears cached data (react-query). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Display the canonical earning plans (Plan 1–4) consistently by fetching them from the backend capability (not hardcoding business-critical values).",
+      "acceptanceCriteria": [
+        "Plans page lists all 4 plans with the exact deposit, daily profit, and duration values shown above.",
+        "Backend exposes a query to fetch the canonical plan list so the frontend is not hardcoding business-critical values."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePlans.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that fetches available plans via the backend actor and normalizes bigint formatting for UI display (without hardcoding plan amounts)."
+        },
+        {
+          "path": "frontend/src/pages/PlansPage.tsx",
+          "operation": "modify",
+          "description": "Render the plan list using data from the plans hook; show deposit amount, daily profit, and duration. Use shadcn-ui Card/Badge/Button for consistent presentation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/PlanCard.tsx",
+          "operation": "create",
+          "description": "Add a reusable PlanCard component for displaying a plan consistently across pages (Plans, Deposit selection). Use shadcn-ui Card/Badge. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement a deposit flow that shows deposit account details and allows submitting a deposit request with an uploaded payment screenshot, plus status display.",
+      "acceptanceCriteria": [
+        "Deposit page displays: “Tayyab Raza”, “03710416136”, and “Easypaisa”.",
+        "User can select a plan to deposit for and upload a screenshot file.",
+        "Submitting creates a deposit request stored in the backend with status at least: Pending, Approved, Rejected.",
+        "UI shows the current status of the user’s latest (or all) deposit requests."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useDepositAccountDetails.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that fetches deposit account details (account holder name/number/channel) from the backend actor for display on the Deposit page."
+        },
+        {
+          "path": "frontend/src/hooks/useSubmitDepositRequest.ts",
+          "operation": "create",
+          "description": "Create a mutation hook to submit a deposit request with selected planId and uploaded screenshot converted into blob-storage ExternalBlob bytes. Track upload progress in UI state. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/FileUploadField.tsx",
+          "operation": "create",
+          "description": "Create a reusable file upload field for selecting an image file and converting it into bytes suitable for blob-storage ExternalBlob.fromBytes, including optional progress UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DepositPage.tsx",
+          "operation": "modify",
+          "description": "Implement Deposit UI: show backend-provided account details (must render exactly “Tayyab Raza”, “03710416136”, and “Easypaisa”), allow plan selection (using PlanCard), screenshot upload, submit action, and English validation/errors. Use shadcn-ui Form controls (Input/Button/Select/Alert). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useMyDepositRequests.ts",
+          "operation": "create",
+          "description": "Implement a user-facing hook to load the current user's deposit requests and statuses. Use available backend capabilities and handle authorization failures gracefully (show an English message if not permitted)."
+        },
+        {
+          "path": "frontend/src/components/DepositRequestList.tsx",
+          "operation": "create",
+          "description": "Render the user’s latest/all deposit requests with status badges (Pending/Approved/Rejected) and timestamps. Use shadcn-ui Table/Badge/Skeleton for a clean read-only view. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DepositPage.tsx",
+          "operation": "modify",
+          "description": "Wire DepositRequestList into the Deposit page so users can see the current status of their deposit requests. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Show active plan and earnings accrual in Wallet/Balance UI, derived from approved deposits and time elapsed (capped to plan duration).",
+      "acceptanceCriteria": [
+        "Backend can mark a deposit request as Approved and create/activate the corresponding plan for the user.",
+        "Wallet/Balance page shows: active plan (if any), start date, end date, daily profit, and accrued earnings-to-date based on time elapsed (capped to the plan duration).",
+        "Accrued earnings does not increase beyond the plan’s total duration."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/earnings.ts",
+          "operation": "create",
+          "description": "Add pure utility functions to compute plan start/end dates and accrued earnings-to-date from an approved deposit timestamp, plan durationDays, and dailyProfit, capped to duration."
+        },
+        {
+          "path": "frontend/src/hooks/useAvailableBalance.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that fetches the user's available balance from the backend actor and formats bigint for display."
+        },
+        {
+          "path": "frontend/src/pages/WalletPage.tsx",
+          "operation": "modify",
+          "description": "Implement Wallet/Balance UI: show available balance, active plan summary (if any), start/end dates, daily profit, and computed accrued earnings-to-date (capped). Use shadcn-ui Card/Badge/Skeleton components. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useMyDepositRequests.ts",
+          "operation": "modify",
+          "description": "Augment the deposit-requests hook to expose the most recent approved deposit (if any) needed by Wallet to infer the active plan window and accrual, while handling authorization failures gracefully."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement a withdrawal request form with payout method, account number, amount, and min/max validation.",
+      "acceptanceCriteria": [
+        "Withdrawals page includes: amount input, account number input, and method dropdown with exactly “Easypaisa” and “JazzCash”.",
+        "Frontend blocks submission and shows an English validation message if amount < 100 or amount > 5000.",
+        "Backend validates the same min/max constraints and rejects invalid requests.",
+        "Withdrawal request is stored with status at least: Pending, Approved, Rejected.",
+        "Backend prevents creating a withdrawal request that exceeds the user’s available balance (accrued earnings minus previously approved withdrawals)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useWithdrawalLimits.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that fetches the minimum and maximum withdrawal amounts from the backend actor for form validation and helper text."
+        },
+        {
+          "path": "frontend/src/hooks/useSubmitWithdrawalRequest.ts",
+          "operation": "create",
+          "description": "Create a mutation hook to submit withdrawal requests to the backend actor and surface backend validation failures as English UI errors."
+        },
+        {
+          "path": "frontend/src/pages/WithdrawalsPage.tsx",
+          "operation": "modify",
+          "description": "Implement the withdrawal form UI with: account number input, payout method dropdown (exactly “Easypaisa” and “JazzCash”), amount input, and English min/max validation (block submission outside bounds). Use shadcn-ui Input/Select/Button/Alert. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useMyWithdrawalRequests.ts",
+          "operation": "create",
+          "description": "Implement a user-facing hook to load the current user's withdrawal requests and statuses. Use available backend capabilities and handle authorization failures gracefully (show an English message if not permitted)."
+        },
+        {
+          "path": "frontend/src/components/WithdrawalRequestList.tsx",
+          "operation": "create",
+          "description": "Render the user’s latest/all withdrawal requests with status badges and timestamps for transparency. Use shadcn-ui Table/Badge/Skeleton. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/WithdrawalsPage.tsx",
+          "operation": "modify",
+          "description": "Wire WithdrawalRequestList into the Withdrawals page to show request history and current statuses. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement referrals UI: show user referral code/link with copy, show referral counts and tier bonus progress.",
+      "acceptanceCriteria": [
+        "Each user has a referral code/link visible on a Referrals page with a copy button.",
+        "Backend records who referred a new user at signup/first login (based on provided referral code).",
+        "Backend counts only referrals that have an active plan when evaluating tiers.",
+        "Each tier bonus is granted at most once per user and is added to the user’s balance/earnings.",
+        "Referrals page shows: total referred users, referred users with active plans, and which bonus tiers have been earned."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Create hooks to fetch and cache the caller's user profile from the backend actor and to save it when needed (per authorization component guidance). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useReferralTiers.ts",
+          "operation": "create",
+          "description": "Create a React Query hook to fetch referral tiers from the backend actor and format them for display (e.g., required referrals => bonus)."
+        },
+        {
+          "path": "frontend/src/components/CopyToClipboardButton.tsx",
+          "operation": "create",
+          "description": "Create a small reusable copy-to-clipboard UI for referral code/link with English success/error messaging. Use shadcn-ui Button/Toast (or Alert) patterns. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/ReferralsPage.tsx",
+          "operation": "modify",
+          "description": "Implement Referrals page: display referral code and a computed referral link string with a copy button; show tier table/progress using backend-provided tiers and backend-provided referral stats (render earned vs not-earned tiers). Use shadcn-ui Card/Table/Badge. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add admin-only UI to review deposit and withdrawal requests and approve/reject them inside the app.",
+      "acceptanceCriteria": [
+        "Backend defines an admin principal list (configurable in code) and restricts admin actions to admins only.",
+        "Admin UI lists pending deposit requests (including the uploaded screenshot preview) with Approve/Reject actions.",
+        "Admin UI lists pending withdrawal requests with Approve/Reject actions.",
+        "Approving a deposit activates the plan; approving a withdrawal reduces available balance accordingly."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AdminGate.tsx",
+          "operation": "create",
+          "description": "Create an admin-only guard wrapper that checks caller admin status via the backend actor; non-admins see an English Access Denied screen. Use the authorization component guidance for access-control UI and error handling. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/admin/AdminDashboardPage.tsx",
+          "operation": "create",
+          "description": "Create an admin dashboard page with tabs/sections for Deposit Requests and Withdrawal Requests. Use shadcn-ui Tabs/Card/Table. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminDepositRequests.ts",
+          "operation": "create",
+          "description": "Create admin-only React Query hooks to fetch all deposit requests and filter to Pending in the UI; include action mutations for approve/reject and ensure queries refresh after actions."
+        },
+        {
+          "path": "frontend/src/hooks/useAdminWithdrawalRequests.ts",
+          "operation": "create",
+          "description": "Create admin-only React Query hooks to fetch all withdrawal requests and filter to Pending in the UI; include action mutations for approve/reject and ensure queries refresh after actions."
+        },
+        {
+          "path": "frontend/src/components/admin/PendingDepositsTable.tsx",
+          "operation": "create",
+          "description": "Render pending deposit requests for admins, including a screenshot preview using blob-storage ExternalBlob.getDirectURL(), and Approve/Reject actions. Use shadcn-ui Table/Button/Badge/Dialog. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/admin/PendingWithdrawalsTable.tsx",
+          "operation": "create",
+          "description": "Render pending withdrawal requests for admins with Approve/Reject actions. Use shadcn-ui Table/Button/Badge/Dialog. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the admin dashboard route into the router/navigation, but only display/allow navigation when the user is an admin (via AdminGate). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Establish and apply a coherent finance-dashboard visual theme (avoid default blue/purple) across all pages.",
+      "acceptanceCriteria": [
+        "App uses a consistent color palette (not default blue/purple), typography scale, and spacing rhythm across pages.",
+        "Key pages (Plans, Deposit, Wallet, Withdrawals, Referrals) share consistent layout structure and component styling.",
+        "UI remains readable and responsive on mobile and desktop."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Update global CSS variables to a distinct warm/neutral finance theme (e.g., slate/charcoal + warm accent like amber/emerald) avoiding default blue/purple, while keeping readability in light/dark modes."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions if needed to support the chosen palette and consistent spacing/typography across the app."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a reusable layout wrapper that standardizes page structure (header + responsive container + consistent section spacing). Use shadcn-ui layout primitives as needed. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all main pages with AppLayout so the visual theme and spacing are applied consistently across Plans/Deposit/Wallet/Withdrawals/Referrals/Account. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add generated static branding images and render them in the UI (logo in header; illustration on landing/Plans).",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend (no backend image routing).",
+        "At minimum, the logo is used in the app header and/or landing area, and an illustration is used on the landing or Plans page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/earn-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated static logo asset at the exact path frontend/public/assets/generated/earn-logo.dim_512x512.png (referenced directly by the frontend)."
+        },
+        {
+          "path": "frontend/public/assets/generated/earn-hero-illustration.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated static illustration asset at the exact path frontend/public/assets/generated/earn-hero-illustration.dim_1600x900.png (referenced directly by the frontend)."
+        },
+        {
+          "path": "frontend/src/components/AppHeader.tsx",
+          "operation": "create",
+          "description": "Create an app header component that displays the Earn brand (including the static logo at frontend/public/assets/generated/earn-logo.dim_512x512.png) and primary navigation. Use shadcn-ui Button components for nav/actions. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/PlansPage.tsx",
+          "operation": "modify",
+          "description": "Render the illustration on the Plans page (frontend/public/assets/generated/earn-hero-illustration.dim_1600x900.png) to add basic UI polish while keeping a finance-dashboard feel. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Wire AppHeader into the shared layout so the logo is consistently visible across the app. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "kind": "build_request",
+  "title": "Build “Earn” online earning app with plans, deposit screenshot submission, withdrawals, and referral bonuses",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create the core app information architecture and navigation for an app named “Earn”, including pages/sections for: Plans, Deposit, Wallet/Balance, Withdrawals, Referrals, and Account.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Name earn",
+          "Plan;1 deposit 300 ...",
+          "Deposit number ...",
+          "Withdrawal ...",
+          "Referral bonus ..."
+        ]
+      },
+      "acceptanceCriteria": [
+        "App header/landing clearly shows the product name “Earn”.",
+        "User can navigate to Plans, Deposit, Withdrawals, Referrals, and Wallet/Balance from the UI.",
+        "All user-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement earning plans exactly as provided and display them consistently across the app: Plan 1 (Deposit 300, Daily profit 50, Duration 7 days), Plan 2 (Deposit 700, Daily profit 110, Duration 7 days), Plan 3 (Deposit 2000, Daily profit 200, Duration 12 days), Plan 4 (Deposit 5000, Daily profit 250, Duration 30 days).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Plan;1 deposit 300 Daily profit 50 Total day 7",
+          "Plan 2 deposit 700 Daily profit 110 Total day 7",
+          "Plan 3 deposit 2000 Daily profit 200 Plan day 12",
+          "Plan 4 deposit 5000 Daily profit 250 Total day 30"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Plans page lists all 4 plans with the exact deposit, daily profit, and duration values shown above.",
+        "Backend exposes a query to fetch the canonical plan list so the frontend is not hardcoding business-critical values."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement a deposit flow that shows the deposit account details and allows the user to submit a deposit request with an uploaded payment screenshot for verification. Deposit details must include: Account holder name “Tayyab Raza”, number “03710416136”, channel “Easypaisa”.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Deposit number",
+          "Tayyab raza 03710416136",
+          "Easy paisa",
+          "send screen shot"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Deposit page displays: “Tayyab Raza”, “03710416136”, and “Easypaisa”.",
+        "User can select a plan to deposit for and upload a screenshot file.",
+        "Submitting creates a deposit request stored in the backend with status at least: Pending, Approved, Rejected.",
+        "UI shows the current status of the user’s latest (or all) deposit requests."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement plan activation and earnings accrual tied to approved deposits: when a deposit request for a plan is approved, that plan becomes active for the user for its configured duration and the user accrues daily profit for that duration.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Plan;1 deposit 300 Daily profit 50 Total day 7",
+          "...",
+          "send screen shot"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend can mark a deposit request as Approved and create/activate the corresponding plan for the user.",
+        "Wallet/Balance page shows: active plan (if any), start date, end date, daily profit, and accrued earnings-to-date based on time elapsed (capped to the plan duration).",
+        "Accrued earnings does not increase beyond the plan’s total duration."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement a withdrawal request form where the user enters an account number and selects a payout method (“Easypaisa” or “JazzCash”), and enters an amount. Enforce minimum withdrawal of 100 and maximum withdrawal of 5000.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Withdrawal",
+          "Enter number and",
+          "Select easy paisa jazz cash account",
+          "Minimum withdrawal 100",
+          "and 5000"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Withdrawals page includes: amount input, account number input, and method dropdown with exactly “Easypaisa” and “JazzCash”.",
+        "Frontend blocks submission and shows an English validation message if amount < 100 or amount > 5000.",
+        "Backend validates the same min/max constraints and rejects invalid requests.",
+        "Withdrawal request is stored with status at least: Pending, Approved, Rejected.",
+        "Backend prevents creating a withdrawal request that exceeds the user’s available balance (accrued earnings minus previously approved withdrawals)."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement a referral system that assigns each user a referral code/link and tracks referred signups. Award one-time referral bonuses when the number of referrals who have joined AND have an active plan reaches these tiers: 3 referrals => 150 bonus, 5 => 300, 10 => 800, 50 => 4000.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Referral bonus 3 referral join and plan active bonus 150",
+          "5 referral bonus 300",
+          "10 referral bonus 800",
+          "50 referral bonus 4000"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each user has a referral code/link visible on a Referrals page with a copy button.",
+        "Backend records who referred a new user at signup/first login (based on provided referral code).",
+        "Backend counts only referrals that have an active plan when evaluating tiers.",
+        "Each tier bonus is granted at most once per user and is added to the user’s balance/earnings.",
+        "Referrals page shows: total referred users, referred users with active plans, and which bonus tiers have been earned."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add an admin-only workflow to review and process deposit and withdrawal requests (approve/reject) so that “send screenshot” verification and withdrawals can be managed inside the app.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "send screen shot",
+          "Withdrawal"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend defines an admin principal list (configurable in code) and restricts admin actions to admins only.",
+        "Admin UI lists pending deposit requests (including the uploaded screenshot preview) with Approve/Reject actions.",
+        "Admin UI lists pending withdrawal requests with Approve/Reject actions.",
+        "Approving a deposit activates the plan; approving a withdrawal reduces available balance accordingly."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Establish a coherent visual theme for the “Earn” app and apply it consistently across all pages (typography, spacing, component styling, and layout). Choose a distinct style appropriate for a finance/earning dashboard (avoid blue/purple by default).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App uses a consistent color palette (not default blue/purple), typography scale, and spacing rhythm across pages.",
+        "Key pages (Plans, Deposit, Wallet, Withdrawals, Referrals) share consistent layout structure and component styling.",
+        "UI remains readable and responsive on mobile and desktop."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add generated static image assets for branding and basic UI polish, and render them in the UI (stored under frontend/public/assets/generated).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend (no backend image routing).",
+        "At minimum, the logo is used in the app header and/or landing area, and an illustration is used on the landing or Plans page."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must be a single Motoko actor (no multi-canister architecture).",
+    "Do not modify any frontend paths marked immutable by SYSTEM_CONTEXT (compose existing UI components instead).",
+    "No external payment provider integrations; deposits/withdrawals are request-based with manual admin processing.",
+    "Use English for all user-facing text."
+  ],
+  "nonGoals": [
+    "Automatic payment confirmation or real-money transfer integration with Easypaisa/JazzCash.",
+    "Real-time notifications/chat for approvals.",
+    "Email/SMS or push notification delivery."
+  ],
+  "imageRequirements": {
+    "required": [
+      "App logo mark with text “Earn”, modern minimal style (earn-logo.dim_512x512.png)",
+      "Landing illustration showing abstract growth/earnings dashboard elements, warm palette (earn-hero-illustration.dim_1600x900.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [
+      "Build an online earning app named “Earn” with deposit-based plans, withdrawals, and referral bonuses."
+    ],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "Use English for all user-facing text."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}
